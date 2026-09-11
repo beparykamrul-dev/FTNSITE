@@ -1,6 +1,6 @@
 {
   "name": "ftnsite",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -13,7 +13,8 @@
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "socket.io-client": "latest"
+    "socket.io-client": "latest",
+    "prom-client": "latest"
   },
   "devDependencies": {
     "@types/node": "latest",
