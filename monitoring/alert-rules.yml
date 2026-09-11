@@ -1,0 +1,23 @@
+groups:
+  - name: ftn-infrastructure
+    rules:
+      - alert: FTNHighCPU
+        expr: ftn_cpu_percent > 85
+        for: 5m
+        labels: {severity: warning}
+      - alert: FTNHighMemory
+        expr: ftn_memory_percent > 90
+        for: 5m
+        labels: {severity: warning}
+      - alert: FTNPacketLoss
+        expr: ftn_packet_loss_percent > 5
+        for: 2m
+        labels: {severity: critical}
+      - alert: FTNDeviceDown
+        expr: ftn_device_up == 0
+        for: 2m
+        labels: {severity: critical}
+      - alert: FTNInterfaceErrors
+        expr: rate(ftn_interface_errors_total[5m]) > 10
+        for: 5m
+        labels: {severity: warning}
