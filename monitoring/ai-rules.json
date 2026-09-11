@@ -1,0 +1,9 @@
+{
+  "version": "1.0",
+  "signals": ["cpu", "memory", "latency", "packet_loss", "errors", "traffic", "device_state", "onu_state", "api_state", "snmp_state"],
+  "correlation": true,
+  "anomaly_detection": true,
+  "root_cause_hinting": true,
+  "actions": "read-only by default",
+  "human_approval_required": true
+}
