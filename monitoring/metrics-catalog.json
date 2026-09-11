@@ -1,0 +1,9 @@
+{
+  "system": ["cpu_percent", "memory_percent", "load1", "uptime_seconds"],
+  "network": ["rx_bps", "tx_bps", "packet_loss_percent", "latency_ms", "interface_errors_total", "interface_discards_total"],
+  "device": ["device_up", "device_cpu_percent", "device_memory_percent"],
+  "olt": ["onu_online", "onu_offline", "optical_rx_dbm", "optical_tx_dbm"],
+  "application": ["websocket_clients", "http_requests_total", "http_request_duration_ms"],
+  "database": ["db_latency_ms", "db_connections", "db_errors_total"],
+  "tiktok": ["events_total", "webhook_errors_total", "api_latency_ms"]
+}
