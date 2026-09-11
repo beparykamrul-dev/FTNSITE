@@ -1,31 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./monitoring.css";
 
-const devices = [
-  ["Core Router", "MikroTik", "SNMP + RouterOS", "Healthy"],
-  ["Access-1", "MikroTik", "SNMP", "Healthy"],
-  ["EPON OLT-01", "EPON/OLT", "SNMP", "Warning"],
-];
-
-const metrics = ["CPU %", "Memory %", "RX Mbps", "TX Mbps", "Latency ms", "Packet loss %", "IF errors", "ONU online/offline"];
+type Summary = { source: string; totals: { all: number; online: number; offline: number; unknown: number }; alerts: number; ai: { status: string; findings: string[] } };
+const empty: Summary = { source: "unavailable", totals: { all: 0, online: 0, offline: 0, unknown: 0 }, alerts: 0, ai: { status: "waiting", findings: [] } };
 
 export default function MonitoringPage() {
-  const [saved, setSaved] = useState(false);
-  return (
-    <main className="monitoring">
-      <header>
-        <div><span className="eyebrow">FTN NOC</span><h1>Metrics • SNMP • Devices • Alerts</h1><p>এক জায়গা থেকে device, metric collector এবং alert policy পরিচালনা করুন।</p></div>
-        <button onClick={() => setSaved(true)}>{saved ? "Saved" : "Save setup"}</button>
-      </header>
-      <section className="grid">
-        <article><h2>Metrics</h2><div className="chips">{metrics.map((m) => <span key={m}>{m}</span>)}</div></article>
-        <article><h2>Collectors</h2><p>SNMPD • Prometheus • OpenTelemetry</p><p>ICMP • RouterOS • NetFlow/IPFIX</p></article>
-        <article><h2>Device drivers</h2><p>MikroTik RouterOS/SNMP</p><p>Generic SNMP • EPON/OLT SNMP • ICMP</p></article>
-      </section>
-      <section className="panel"><h2>Devices</h2>{devices.map(([name, vendor, protocol, status]) => <div className="row" key={name}><strong>{name}</strong><span>{vendor}</span><span>{protocol}</span><b className={status === "Healthy" ? "ok" : "warn"}>{status}</b></div>)}</section>
-      <section className="panel"><h2>Alert setup</h2><div className="alert-grid"><label>CPU threshold<input defaultValue="85" type="number" />%</label><label>Memory threshold<input defaultValue="90" type="number" />%</label><label>Packet loss<input defaultValue="5" type="number" />%</label><label>DB latency<input defaultValue="100" type="number" />ms</label></div><div className="channels"><label><input type="checkbox" defaultChecked /> Web</label><label><input type="checkbox" /> Email</label><label><input type="checkbox" /> Telegram</label><label><input type="checkbox" /> Webhook</label></div></section>
-    </main>
-  );
+  const [data, setData] = useState(empty);
+  useEffect(() => { fetch("/api/monitoring").then(r => r.json()).then(setData).catch(() => setData(empty)); }, []);
+  return <main className="monitoring"><header><div><span className="eyebrow">FTN NOC</span><h1>Universal Device Monitoring</h1><p>সব vendor/device এক interface: SNMP, API, ICMP, metrics, alerts এবং AI.</p></div><div className="status">Source: {data.source}</div></header>
+    <section className="grid">{[["Devices",data.totals.all],["Online",data.totals.online],["Offline",data.totals.offline],["Unknown",data.totals.unknown],["Alerts",data.alerts],["AI",data.ai.status]].map(([a,b])=><article key={String(a)}><h2>{a}</h2><strong>{b}</strong></article>)}</section>
+    <section className="panel"><h2>AI Monitoring</h2>{data.ai.findings.length ? data.ai.findings.map(x=><p key={x}>{x}</p>) : <p>No findings yet. Collector/API disconnected হলেও FTN interface available.</p>}</section>
+    <section className="panel"><h2>Universal functions</h2><p>Overview · Health · Interfaces · Traffic · Latency · Packet loss · Errors · Processes · Resources · Logs · Events · Alerts · Configuration</p></section>
+  </main>;
 }
