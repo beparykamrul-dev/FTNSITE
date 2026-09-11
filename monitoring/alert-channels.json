@@ -1,0 +1,9 @@
+{
+  "channels": [
+    {"id":"web","enabled":true},
+    {"id":"email","enabled":false},
+    {"id":"telegram","enabled":false},
+    {"id":"webhook","enabled":false}
+  ],
+  "secrets": "environment-or-secret-manager-only"
+}
