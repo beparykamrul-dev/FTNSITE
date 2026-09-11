@@ -1,0 +1,32 @@
+{
+  "providers": {
+    "censys": {
+      "enabled": true,
+      "purpose": ["internet-asset-context", "host-service-context", "certificate-context"],
+      "credentialEnv": "CENSYS_API_TOKEN",
+      "browserSecretExposure": false,
+      "apiBase": "https://api.platform.censys.io"
+    },
+    "netlas": {
+      "enabled": true,
+      "purpose": ["host-context", "dns-context", "whois-context", "certificate-context", "attack-surface-context"],
+      "credentialEnv": "NETLAS_API_KEY",
+      "browserSecretExposure": false,
+      "apiBase": "https://app.netlas.io/api"
+    },
+    "globalping": {
+      "enabled": true,
+      "purpose": ["global-ping", "http", "dns", "mtr", "traceroute"],
+      "credentialEnv": "GLOBALPING_API_TOKEN",
+      "browserSecretExposure": false,
+      "apiBase": "https://api.globalping.io/v1"
+    }
+  },
+  "policy": {
+    "authorizedAssetsOnly": true,
+    "externalResultsAreContext": true,
+    "neverTreatExternalInventoryAsDeviceTruth": true,
+    "cacheResults": true,
+    "showProviderHealthInUi": true
+  }
+}
