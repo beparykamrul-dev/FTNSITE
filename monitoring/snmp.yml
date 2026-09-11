@@ -1,0 +1,24 @@
+# FTN SNMP polling contract. Keep communities/credentials outside Git.
+global:
+  scrape_interval: 30s
+
+modules:
+  generic_snmp:
+    version: 2c
+    walk:
+      - 1.3.6.1.2.1.1
+      - 1.3.6.1.2.1.2
+      - 1.3.6.1.2.1.31
+  mikrotik:
+    version: 2c
+    walk:
+      - 1.3.6.1.2.1.1
+      - 1.3.6.1.2.1.2
+      - 1.3.6.1.2.1.31
+      - 1.3.6.1.4.1.14988
+  olt:
+    version: 2c
+    walk:
+      - 1.3.6.1.2.1.1
+      - 1.3.6.1.2.1.2
+      - 1.3.6.1.2.1.31
