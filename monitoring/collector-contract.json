@@ -1,0 +1,7 @@
+{
+  "version": "1.0",
+  "sources": ["snmp", "snmpd", "api", "icmp", "routeros", "netflow", "ipfix", "logs", "websocket"],
+  "rule": "every source is optional; UI consumes one normalized device contract",
+  "fallback": "last-known -> unknown -> unavailable",
+  "security": "credentials stay server-side"
+}
