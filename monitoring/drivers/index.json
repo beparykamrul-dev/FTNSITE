@@ -1,0 +1,13 @@
+{
+  "drivers": [
+    {"id":"mikrotik","protocols":["snmp","routeros-api","icmp"]},
+    {"id":"olt","protocols":["snmp","icmp"]},
+    {"id":"generic-snmp","protocols":["snmpv2c","snmpv3"]},
+    {"id":"generic-api","protocols":["https","http"]},
+    {"id":"icmp","protocols":["icmp"]},
+    {"id":"linux","protocols":["ssh","node-exporter","snmp"]},
+    {"id":"windows","protocols":["wmi","snmp"]},
+    {"id":"netflow","protocols":["netflow","ipfix","sflow"]}
+  ],
+  "fallback": "generic"
+}
