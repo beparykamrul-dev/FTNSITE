@@ -1,0 +1,11 @@
+{
+  "devices": [],
+  "schema": {
+    "name": "string",
+    "address": "string",
+    "driver": "mikrotik|olt|generic-snmp|icmp",
+    "snmp_version": "2c|3",
+    "enabled": true,
+    "tags": []
+  }
+}
